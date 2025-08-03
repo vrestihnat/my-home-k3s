@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: phptest-service
+  namespace: phptest
+  labels:
+    app: phptest
+spec:
+  selector:
+    app: phptest
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  type: ClusterIP

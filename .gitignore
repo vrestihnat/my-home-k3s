@@ -1,0 +1,144 @@
+# K3s Home Setup - .gitignore
+
+# Kubernetes konfigurace a secrets
+*.kubeconfig
+kubeconfig
+.kube/
+k3s.yaml
+
+# SSL certifikáty a klíče
+*.crt
+*.key
+*.pem
+*.p12
+*.pfx
+tls.crt
+tls.key
+
+# Kubernetes secrets a sensitive data
+*secret*.yaml
+*-secret.yaml
+secrets/
+.secrets/
+
+# Helm charts cache
+charts/
+*.tgz
+
+# Backup soubory
+backups/
+*.backup
+*.bak
+custom.list.backup.*
+
+# Logy
+logs/
+*.log
+*.out
+
+# Temporary soubory
+tmp/
+temp/
+.tmp/
+*.tmp
+
+# Docker build cache
+.docker/
+docker-compose.override.yml
+
+# IDE a editor soubory
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Environment soubory
+.env
+.env.local
+.env.production
+.env.staging
+*.env
+
+# SSH klíče
+id_rsa
+id_rsa.pub
+*.pem
+authorized_keys
+
+# Terraform (pokud by se používal)
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+
+# Ansible (pokud by se používal)
+*.retry
+.vault_pass
+
+# Monitoring a metriky
+prometheus/
+grafana/
+alertmanager/
+
+# Databáze dumps
+*.sql
+*.dump
+*.db
+
+# Aplikační data
+data/
+volumes/
+persistent-volumes/
+
+# Build artefakty
+dist/
+build/
+target/
+*.jar
+*.war
+
+# Node.js (pokud by byly JS aplikace)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python (pokud by byly Python aplikace)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# Go (pokud by byly Go aplikace)
+vendor/
+*.exe
+*.exe~
+
+# Registry data
+registry-data/
+
+# Custom aplikace secrets
+apps/*/secrets/
+apps/*/.env
+apps/*/config/secrets.yaml
+
+# Helm values s hesly
+*values-prod.yaml
+*values-secret.yaml
+
+# Ingress s production certifikáty
+*ingress-prod.yaml
+
+# Pi-hole konfigurace s hesly
+pihole-admin-password.txt
+
+# Lokální testovací soubory
+test-*
+*-test.yaml
+playground/
