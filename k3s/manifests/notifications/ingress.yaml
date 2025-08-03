@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: notifications-ingress
+  namespace: notifications
+  annotations:
+    # Traefik specifické anotace
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    
+    # Cert-manager anotace pro automatické SSL
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    
+    # Přesměrování HTTP na HTTPS
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+    
+    # SSE a WebSocket podpora (volitelné - pouze pokud existuje middleware)
+    # traefik.ingress.kubernetes.io/router.middlewares: notifications-headers@kubernetescrd
+    
+    # Timeout pro dlouhé SSE spojení
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.name: "notifications-session"
+spec:
+  tls:
+  - hosts:
+    - notifications.janzar.eu
+    secretName: notifications-tls
+  rules:
+  - host: notifications.janzar.eu
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: notifications-service
+            port:
+              number: 80

@@ -1,0 +1,22 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: notifications-headers
+  namespace: notifications
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: "https"
+    customResponseHeaders:
+      X-Accel-Buffering: "no"
+      Cache-Control: "no-cache"
+    accessControlAllowOriginList:
+      - "*"
+    accessControlAllowHeaders:
+      - "Content-Type"
+      - "Authorization"
+      - "Cache-Control"
+    accessControlAllowMethods:
+      - "GET"
+      - "POST"
+      - "OPTIONS"
