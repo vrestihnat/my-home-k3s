@@ -20,7 +20,7 @@ spec:
         image: localhost:5000/push-notifications-api:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 3000
+        - containerPort: 3560
           name: http
         envFrom:
         - configMapRef:
@@ -37,14 +37,14 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 3000
+            port: 3560
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
         readinessProbe:
           httpGet:
             path: /
-            port: 3000
+            port: 3560
           initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 3

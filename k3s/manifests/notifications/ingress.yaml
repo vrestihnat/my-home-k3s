@@ -4,23 +4,17 @@ metadata:
   name: notifications-ingress
   namespace: notifications
   annotations:
-    # Traefik specifické anotace
+    # Základní Traefik konfigurace
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    
-    # Cert-manager anotace pro automatické SSL
+
+    # Cert-manager pro SSL
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    
-    # Přesměrování HTTP na HTTPS
-    traefik.ingress.kubernetes.io/redirect-entry-point: https
-    traefik.ingress.kubernetes.io/redirect-permanent: "true"
-    
-    # SSE a WebSocket podpora (volitelné - pouze pokud existuje middleware)
-    # traefik.ingress.kubernetes.io/router.middlewares: notifications-headers@kubernetescrd
-    
-    # Timeout pro dlouhé SSE spojení
-    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
-    traefik.ingress.kubernetes.io/service.sticky.cookie.name: "notifications-session"
+
+    # HTTPS redirect
+    traefik.ingress.kubernetes.io/redirect-scheme: https
+
+    # SSE middleware pro správné hlavičky
+    traefik.ingress.kubernetes.io/router.middlewares: notifications-notifications-headers@kubernetescrd
 spec:
   tls:
   - hosts:
